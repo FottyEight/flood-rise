@@ -49,6 +49,12 @@ export const FALLBACK_GUEST = {
   face: null,
 };
 
+// After sign-in start.ng sends the player back with #startng_session=… in the address.
+// This game asks the connect page instead, so just clear it from the address bar.
+if (location.hash.includes('startng_session')) {
+  history.replaceState(null, '', location.pathname + location.search);
+}
+
 export const onStartNg = location.hostname.endsWith('.start.ng');
 export const cameAsGuest = new URLSearchParams(location.search).has('guest');
 

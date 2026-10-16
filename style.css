@@ -46,7 +46,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @keyframes rise { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, -60px); } }
 
 /* Screens */
-.screen { position: fixed; inset: 0; z-index: 6; display: grid; place-items: center; padding: 88px 16px 16px; overflow-y: auto; }
+/* screens cover the page but only their panel takes clicks, so the profile card and mute button stay usable */
+.screen { position: fixed; inset: 0; z-index: 6; display: grid; place-items: center; padding: 88px 16px 16px; overflow-y: auto; pointer-events: none; }
+.screen .panel { pointer-events: auto; }
 #menu { place-items: center end; padding-right: max(16px, 6vw); }
 .panel { width: min(440px, 100%); background: var(--panel); border: 1px solid var(--edge); border-radius: 20px; padding: 24px;
   backdrop-filter: blur(6px); box-shadow: 0 20px 50px rgba(0,0,0,.35); }
