@@ -1,0 +1,8 @@
+{
+  "leaderboard": {
+    "stats": [
+      { "key": "height", "label": "Height (m)", "order": "highest" },
+      { "key": "sachets", "label": "Pure water sachets", "order": "highest" }
+    ]
+  }
+}

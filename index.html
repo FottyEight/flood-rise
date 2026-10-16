@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Flood Rise · start.ng</title>
+<meta name="description" content="Lagos don flood! Climb rooftops, danfos and billboards before the water catches you.">
+<meta name="theme-color" content="#2b3540">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+</head>
+<body data-mode="menu">
+<div id="stage"></div>
+
+<!-- start.ng profile card: face, character name, @account -->
+<div class="card" id="card">
+  <img id="card-face" alt="" hidden>
+  <div class="card-initial" id="card-initial">G</div>
+  <div class="card-text">
+    <b id="card-name">Guest</b>
+    <span id="card-account">Playing as guest</span>
+  </div>
+  <button id="card-signin" type="button">Sign in</button>
+</div>
+
+<button class="mute" id="mute" type="button" aria-label="Sound on or off">🔊</button>
+
+<div class="hud" id="hud" hidden>
+  <div class="stats">
+    <div><small>Height</small><b id="hud-height">0 m</b></div>
+    <div><small>Best</small><b id="hud-best">0 m</b></div>
+    <div><small>Sachets</small><b id="hud-sachets">0</b></div>
+  </div>
+  <div class="water">
+    <div class="water-bar"><div id="water-fill"></div></div>
+    <span id="water-gauge">Water 4.0 m below</span>
+  </div>
+</div>
+<div id="pops"></div>
+
+<section class="screen" id="menu">
+  <div class="panel">
+    <p class="kicker">A start.ng game</p>
+    <h1>Flood <span>Rise</span></h1>
+    <p class="lead">Lagos don flood! The water is rising fast. Jump across rooftops, danfos, water tanks and billboards, grab pure water sachets, and climb as high as you can.</p>
+    <ul class="controls">
+      <li><kbd>W A S D</kbd> or arrows to run</li>
+      <li><kbd>Space</kbd> to jump (hold for higher)</li>
+      <li>Drag or <kbd>Q</kbd> <kbd>E</kbd> to turn the camera</li>
+    </ul>
+    <button class="big" id="play" type="button">Play</button>
+    <p class="note" id="menu-signin-note">Playing as a guest. <button class="link" id="menu-signin" type="button">Sign in with start.ng</button> to play as your own character and save your score.</p>
+  </div>
+</section>
+
+<section class="screen" id="paused" hidden>
+  <div class="panel small">
+    <h2>Paused</h2>
+    <button class="big" id="resume" type="button">Resume</button>
+  </div>
+</section>
+
+<section class="screen" id="over" hidden>
+  <div class="panel">
+    <h2 id="over-title">The flood caught you!</h2>
+    <div class="result">
+      <div><small>Height</small><b id="over-height">0 m</b></div>
+      <div><small>Sachets</small><b id="over-sachets">0</b></div>
+    </div>
+    <p class="status" id="over-status"></p>
+    <button class="secondary" id="over-signin" type="button" hidden>Sign in with start.ng</button>
+    <h3>Leaderboard</h3>
+    <ol class="board" id="board"></ol>
+    <p class="note" id="board-note"></p>
+    <button class="big" id="again" type="button">Climb again</button>
+  </div>
+</section>
+
+<div class="touch-controls">
+  <div class="joystick" id="joystick"><div class="knob" id="joystick-knob"></div></div>
+  <button class="jump" id="jump-button" type="button" aria-label="Jump">⤒</button>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

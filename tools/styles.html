@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flood Rise — character styles</title>
+<style>html,body{margin:0;height:100%;background:#cfd8dc;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{ "imports": { "three": "../vendor/three.module.min.js" } }</script>
+</head>
+<body>
+<!-- Dev page: every hair, hat and accessory side by side, to check the character builder. -->
+<script type="module">
+import * as THREE from 'three';
+import { buildCharacter } from '../src/character.js';
+
+const looks = [
+  { body: 'male', hair: 'short', hat: 'none', accessory: 'none', primaryColor: '#4b7bec', secondaryColor: '#2b2f4a', skinColor: '#8d5524', hairColor: '#17120f' },
+  { body: 'female', hair: 'afro', hat: 'none', accessory: 'earrings', primaryColor: '#a55eea', secondaryColor: '#0c6e5a', skinColor: '#5c3a21', hairColor: '#17120f' },
+  { body: 'female', hair: 'braids', hat: 'crown', accessory: 'earrings', primaryColor: '#e84393', secondaryColor: '#2d3436', skinColor: '#8d5524', hairColor: '#3b2314' },
+  { body: 'female', hair: 'bun', hat: 'none', accessory: 'glasses', primaryColor: '#00b894', secondaryColor: '#6c5ce7', skinColor: '#c68642', hairColor: '#2d1b10' },
+  { body: 'female', hair: 'ponytail', hat: 'cap', accessory: 'backpack', primaryColor: '#fdcb6e', secondaryColor: '#d63031', skinColor: '#e0ac69', hairColor: '#4a2c17' },
+  { body: 'male', hair: 'dreads', hat: 'beanie', accessory: 'scarf', primaryColor: '#e17055', secondaryColor: '#0984e3', skinColor: '#5c3a21', hairColor: '#0f0b08' },
+  { body: 'male', hair: 'bald', hat: 'tophat', accessory: 'beard', primaryColor: '#2d3436', secondaryColor: '#636e72', skinColor: '#8d5524', hairColor: '#17120f' },
+  { body: 'male', hair: 'afro', hat: 'cap', accessory: 'glasses', primaryColor: '#55efc4', secondaryColor: '#2b2f4a', skinColor: '#3d2314', hairColor: '#17120f' },
+  { body: 'male', hair: 'short', hat: 'crown', accessory: 'backpack', primaryColor: '#ffffff', secondaryColor: '#1e3799', skinColor: '#c68642', hairColor: '#17120f' },
+  { body: 'unknown', hair: 'mohawk', hat: 'helmet', accessory: 'cape', primaryColor: 'red', skinColor: '#8d5524' },
+];
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+document.body.append(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#cfd8dc');
+scene.add(new THREE.HemisphereLight('#ffffff', '#8899aa', 1.6));
+const sun = new THREE.DirectionalLight('#ffffff', 2.2);
+sun.position.set(3, 6, 5);
+scene.add(sun);
+
+const spacing = 1.15;
+looks.forEach((look, i) => {
+  const c = buildCharacter(look);
+  c.root.position.x = (i - (looks.length - 1) / 2) * spacing;
+  c.root.rotation.y = new URLSearchParams(location.search).has('back') ? Math.PI : -0.35;
+  scene.add(c.root);
+});
+
+const camera = new THREE.PerspectiveCamera(30, innerWidth / innerHeight, 0.1, 100);
+camera.position.set(0, 1.4, 14);
+camera.lookAt(0, 0.95, 0);
+renderer.render(scene, camera);
+</script>
+</body>
+</html>
