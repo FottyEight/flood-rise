@@ -329,9 +329,15 @@ async function renderBoard() {
 $('play').onclick = startGame;
 $('again').onclick = startGame;
 $('resume').onclick = () => setMode('playing');
-$('card-signin').onclick = signIn;
-$('menu-signin').onclick = signIn;
-$('over-signin').onclick = signIn;
+// start.ng only signs players in for games on *.start.ng; anywhere else, say so instead of
+// sending them to a homepage that won't come back.
+const trySignIn = () => {
+  if (onStartNg) signIn();
+  else popText('Sign-in works on flood-rise.start.ng');
+};
+$('card-signin').onclick = trySignIn;
+$('menu-signin').onclick = trySignIn;
+$('over-signin').onclick = trySignIn;
 $('mute').textContent = isMuted() ? '🔇' : '🔊';
 $('mute').onclick = () => { unlock(); $('mute').textContent = toggleMute() ? '🔇' : '🔊'; };
 setMode('menu');
